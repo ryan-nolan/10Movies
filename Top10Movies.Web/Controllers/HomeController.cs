@@ -13,9 +13,9 @@ namespace Top10Movies.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ITop10MovieRepository _top10MoviesRepository;
+        private readonly IMovieListRepository _top10MoviesRepository;
 
-        public HomeController(ILogger<HomeController> logger, ITop10MovieRepository repository)
+        public HomeController(ILogger<HomeController> logger, IMovieListRepository repository)
         {
             _logger = logger;
             _top10MoviesRepository = repository;
@@ -28,7 +28,7 @@ namespace Top10Movies.Web.Controllers
                 Movies = _top10MoviesRepository.GetAllMoviesInTop10() as List<Movie>
             };
 
-            return View();
+            return View(ViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

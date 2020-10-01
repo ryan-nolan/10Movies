@@ -20,7 +20,7 @@ namespace Top10Movies.Web.Models
         public int Budget { get; set; }
         public int Runtime { get; set; }
         public string Genres { get; set; } //Potentially Change to List<Genre> where Genre is an object with an Id and a GenreString
-        [ForeignKey("Top10MoviesId")]
-        public int Top10MoviesListId { get; set; }
+        [ForeignKey("MoviesListId")]
+        public int MovieListId { get; set; }
     }
 }

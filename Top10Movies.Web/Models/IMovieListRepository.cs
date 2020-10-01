@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Top10Movies.Web.Models
 {
-    public interface ITop10MovieRepository
+    public interface IMovieListRepository
     {
         IEnumerable<Movie> GetAllMoviesInTop10();
     }

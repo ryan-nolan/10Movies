@@ -25,7 +25,7 @@ namespace Top10Movies.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<ITop10MovieRepository, EFTop10MovieRepository>();
+            services.AddScoped<IMovieListRepository, EFTop10MovieRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

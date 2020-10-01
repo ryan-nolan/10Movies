@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Top10Movies.Web.Models
 {
-    public class Top10MoviesList
+    public class MovieList
     {
         public int Id { get; set; }
         public string Name { get; set; }

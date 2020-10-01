@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Top10Movies.Web.Models
 {
-    public class EFTop10MovieRepository : ITop10MovieRepository
+    public class EFTop10MovieRepository : IMovieListRepository
     {
         public IEnumerable<Movie> GetAllMoviesInTop10()
         {

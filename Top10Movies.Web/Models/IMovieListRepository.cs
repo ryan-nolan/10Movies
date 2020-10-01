@@ -7,6 +7,7 @@ namespace Top10Movies.Web.Models
 {
     public interface IMovieListRepository
     {
-        IEnumerable<Movie> GetAllMoviesInTop10();
+        IEnumerable<Movie> GetAllMoviesInTop10(int movieListId);
+        IEnumerable<MovieList> GetAllMoviesLists();
     }
 }

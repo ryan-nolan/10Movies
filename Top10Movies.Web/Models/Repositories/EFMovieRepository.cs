@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Top10Movies.Web.Data;
 using Top10Movies.Web.Models.Core;
 

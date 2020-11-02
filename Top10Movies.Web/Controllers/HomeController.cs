@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Top10Movies.Web.Models;
-using Top10Movies.Web.Models.Core;
 using Top10Movies.Web.Models.Services;
 using Top10Movies.Web.Models.ViewModels;
 

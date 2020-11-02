@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Top10Movies.Web.Models.Core;
+﻿using Top10Movies.Web.Models.Core;
 
 namespace Top10Movies.Web.Models.Repositories
 {

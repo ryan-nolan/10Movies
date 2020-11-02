@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Top10Movies.Web.Models;
+using Top10Movies.Web.Models.Services;
 
 namespace Top10Movies.Web
 {
@@ -26,7 +27,7 @@ namespace Top10Movies.Web
         {
             services.AddControllersWithViews();
             //services.AddScoped<IMovieListRepository, EFMovieListRepository>();
-            services.AddScoped<IMovieApiService, MovieApiRepository>();
+            services.AddScoped<IMovieApiService, MovieApiService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

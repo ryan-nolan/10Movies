@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Top10Movies.Web.Models;
 using Top10Movies.Web.Models.Core;
+using Top10Movies.Web.Models.Services;
 using Top10Movies.Web.Models.ViewModels;
 
 namespace Top10Movies.Web.Controllers

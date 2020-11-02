@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using Top10Movies.Web.Models.Core;
 
-namespace Top10Movies.Web.Models
+namespace Top10Movies.Web.Models.Services
 {
-    public class MovieApiRepository : IMovieApiService
+    public class MovieApiService : IMovieApiService
     {
         private readonly IConfiguration _config;
         private readonly string _apiKey;
-        public MovieApiRepository(IConfiguration config)
+        public MovieApiService(IConfiguration config)
         {
             _config = config;
             _apiKey = config["MoviesApiKey"];

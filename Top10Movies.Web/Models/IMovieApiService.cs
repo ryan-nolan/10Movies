@@ -10,6 +10,6 @@ namespace Top10Movies.Web.Models
     {
         Task<Movie> GetMovieById(int? id);
         Task<Movie> GetMovieByImdbId(string imdbId);
-        Task<Movie> GetMovieByTitle(string title);
+        Task<IQueryable<Movie>> GetMoviesBySearchTerm(string searchTerm);
     }
 }

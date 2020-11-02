@@ -56,9 +56,22 @@ namespace Top10Movies.Web.Models
             return m;
         }
 
-        public Task<Movie> GetMovieByTitle(string title)
+
+        //https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Borat&include_adult=false 
+        //DOCS: https://developers.themoviedb.org/3/search/search-movies
+        public async Task<IQueryable<Movie>> GetMoviesBySearchTerm(string searchTerm)
         {
-            throw new NotImplementedException();
+            IQueryable<Movie> movies;
+            string requestUri = $"https://api.themoviedb.org/3/search/movie?api_key={_apiKey}&language=en-US&query={searchTerm}&include_adult=false";
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync(requestUri))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    movies = JsonSerializer.Deserialize<SearchResult>(apiResponse).Movies.AsQueryable();
+                }
+            }
+            return movies;
         }
     }
 }

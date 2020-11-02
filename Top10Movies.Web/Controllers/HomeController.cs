@@ -24,13 +24,17 @@ namespace Top10Movies.Web.Controllers
             _movieRepository = movieRepository;
         }
 
-        public IActionResult Index(int movieId)
+        public IActionResult Index(string searchTerm)
         {
-            var ViewModel = new Top10MoviesListViewModel()
+            Top10MoviesListViewModel ViewModel = null;
+            if (!string.IsNullOrEmpty(searchTerm))
             {
-                Movie = _movieRepository.GetMovieById(movieId).Result
-                //Movie = _movieRepository.GetMovieByImdbId("tt13143964").Result
-            };
+                ViewModel = new Top10MoviesListViewModel()
+                {
+                    Movies = _movieRepository.GetMoviesBySearchTerm(searchTerm).Result
+                    //Movie = _movieRepository.GetMovieByImdbId("tt13143964").Result
+                };
+            }
 
             return View(ViewModel);
         }

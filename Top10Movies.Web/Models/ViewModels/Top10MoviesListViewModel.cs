@@ -10,6 +10,6 @@ namespace Top10Movies.Web.Models.ViewModels
     {
         //public MovieList Top10MoviesList { get; set; }
         //public List<Movie> Movies { get; set; }
-        public Movie Movie { get; set; }
+        public IEnumerable<Movie> Movies { get; set; }
     }
 }

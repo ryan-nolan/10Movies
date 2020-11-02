@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Top10Movies.Web.Models.Clients;
+using Top10Movies.Web.Models.Services;
 using Top10Movies.Web.Models.ViewModels;
 
 namespace Top10Movies.Web.Controllers
@@ -9,12 +10,12 @@ namespace Top10Movies.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IMovieApiClient _movieApiClient;
+        private readonly IMovieApiService _movieApiService;
 
-        public HomeController(ILogger<HomeController> logger, IMovieApiClient movieApiClient)
+        public HomeController(ILogger<HomeController> logger,  IMovieApiService movieApiService)
         {
             _logger = logger;
-            _movieApiClient = movieApiClient;
+            _movieApiService = movieApiService;
         }
 
         public IActionResult Index(string searchTerm)
@@ -24,7 +25,7 @@ namespace Top10Movies.Web.Controllers
             {
                 ViewModel = new Top10MoviesListViewModel()
                 {
-                    Movies = _movieApiClient.GetMoviesBySearchTermAsync(searchTerm).Result
+                    Movies = _movieApiService.GetMoviesBySearchTermAsync(searchTerm).Result
                     //Movie = _movieRepository.GetMovieByImdbIdAsync("tt13143964").Result
                 };
             }

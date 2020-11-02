@@ -10,27 +10,28 @@ namespace Top10Movies.Web.Models.Clients
 {
     public class MovieApiClient : IMovieApiClient
     {
-        private readonly IConfiguration _config;
+        //private readonly IConfiguration _config;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _apiKey;
-        public MovieApiClient(IConfiguration config)
+        public MovieApiClient(IConfiguration config, IHttpClientFactory httpClientFactory)
         {
-            _config = config;
+            _httpClientFactory = httpClientFactory;
             _apiKey = config["MoviesApiKey"];
         }
+
         public async Task<Movie> GetMovieByIdAsync(int? id)
         {
-            
+
             if (id != null & id != 0)
             {
                 string requestUri = $"https://api.themoviedb.org/3/movie/{id.Value}?api_key={_apiKey}&language=en-US";
-                using (var httpClient = new HttpClient())
+                var httpClient = _httpClientFactory.CreateClient();
+                using (var response = await httpClient.GetAsync(requestUri))
                 {
-                    using (var response = await httpClient.GetAsync(requestUri))
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        return JsonSerializer.Deserialize<Movie>(apiResponse);
-                    }
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    return JsonSerializer.Deserialize<Movie>(apiResponse);
                 }
+
             }
             return null;
         }
@@ -38,16 +39,15 @@ namespace Top10Movies.Web.Models.Clients
         public async Task<Movie> GetMovieByImdbIdAsync(string imdbId)
         {
             string requestUri = $"https://api.themoviedb.org/3/find/{imdbId}?api_key={_apiKey}&language=en-US&external_source=imdb_id";
-            using (var httpClient = new HttpClient())
+            var httpClient = _httpClientFactory.CreateClient();
+            using (var response = await httpClient.GetAsync(requestUri))
             {
-                using (var response = await httpClient.GetAsync(requestUri))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    JObject json = JObject.Parse(apiResponse);
-                    var jsonMovieResults = json["movie_results"][0]["id"];
-                    return await GetMovieByIdAsync(jsonMovieResults.Value<int>());
-                }
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(apiResponse);
+                var jsonMovieResults = json["movie_results"][0]["id"];
+                return await GetMovieByIdAsync(jsonMovieResults.Value<int>());
             }
+
         }
 
 
@@ -57,14 +57,13 @@ namespace Top10Movies.Web.Models.Clients
         {
             //IQueryable<Movie> movies;
             string requestUri = $"https://api.themoviedb.org/3/search/movie?api_key={_apiKey}&language=en-US&query={searchTerm}&include_adult=false";
-            using (var httpClient = new HttpClient())
+            var httpClient = _httpClientFactory.CreateClient();
+            using (var response = await httpClient.GetAsync(requestUri))
             {
-                using (var response = await httpClient.GetAsync(requestUri))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    return JsonSerializer.Deserialize<SearchResult>(apiResponse).Movies.AsQueryable();
-                }
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<SearchResult>(apiResponse).Movies.AsQueryable();
             }
+
         }
     }
 }

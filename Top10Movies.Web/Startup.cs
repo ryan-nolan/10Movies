@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Top10Movies.Web.Models.Clients;
+using Top10Movies.Web.Models.Services;
+
 
 namespace Top10Movies.Web
 {
@@ -20,8 +22,13 @@ namespace Top10Movies.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            //services.AddScoped<IMovieListRepository, EFMovieListRepository>();
+
+            //services.AddHttpClient();
+
+            services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();
+            services.AddTransient<IMovieApiService, MovieApiService>();
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,17 @@
+﻿@model MoviesViewModel
+@{
+    ViewData["Title"] = Model.SearchTerm;
+}
+<div class="text-center">
+    @if (Model?.Movies != null)
+    {
+        @foreach (var movie in Model.Movies)
+        {
+            <div>
+                <h3>@movie.Title (@((!string.IsNullOrEmpty(movie.ReleaseDate)) ? @movie.ReleaseDate.Substring(0,4) : "N/A"))</h3>
+                <p>@movie.Overview</p>
+            </div>
+        }
+    }
+
+</div>

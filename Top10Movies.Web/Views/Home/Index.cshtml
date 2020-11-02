@@ -1,26 +1,10 @@
-﻿@model Top10MoviesListViewModel
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <form method="get">
+    <form method="get" asp-action="Movies">
         <input type="text" id="searchTerm" name="searchTerm">
         <input type="submit" value="Submit">
     </form>
-</div>
-
-
-<div class="text-center">
-    @if (Model?.Movies != null)
-    {
-        @foreach (var movie in Model.Movies)
-        {
-            <div>
-                <h3>@movie.Title (@movie.ReleaseDate.Substring(0,4))</h3>
-                <p>@movie.Overview</p>
-            </div>
-        }
-    }
-    
 </div>

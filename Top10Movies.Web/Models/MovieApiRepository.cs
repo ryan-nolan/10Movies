@@ -9,7 +9,7 @@ using Top10Movies.Web.Models.Core;
 
 namespace Top10Movies.Web.Models
 {
-    public class MovieApiRepository : IMovieRepository
+    public class MovieApiRepository : IMovieApiService
     {
         private readonly IConfiguration _config;
 
@@ -33,22 +33,7 @@ namespace Top10Movies.Web.Models
             return m;
         }
 
-        public Movie CreateMovie(Movie m)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Movie DeleteMovieById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Movie DeleteMovie(Movie m)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int SaveChanges()
+        public Task<Movie> GetMovieByTitle(string title)
         {
             throw new NotImplementedException();
         }

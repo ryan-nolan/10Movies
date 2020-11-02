@@ -15,9 +15,9 @@ namespace Top10Movies.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         //private readonly IMovieListRepository _top10MoviesRepository;
-        private readonly IMovieRepository _movieRepository;
+        private readonly IMovieApiService _movieRepository;
 
-        public HomeController(ILogger<HomeController> logger, IMovieRepository movieRepository)
+        public HomeController(ILogger<HomeController> logger, IMovieApiService movieRepository)
         {
             _logger = logger;
             //_top10MoviesRepository = repository;

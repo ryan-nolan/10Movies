@@ -4,7 +4,18 @@
 }
 
 <div class="text-center">
-    <h1>@Model.Movie.Id</h1>
-    <h1>@Model.Movie.Title</h1>
-    <h3>@Model.Movie.Tagline</h3>
+    <form method="get">
+        <input type="text" id="movieId" name="movieId">
+        <input type="submit" value="Submit">
+    </form>
 </div>
+
+
+<div class="text-center">
+    @if (Model.Movie != null && Model.Movie?.Id != 0)
+    {
+        <h1>@Model.Movie?.Id</h1>
+        <h1>@Model.Movie?.Title</h1>
+        <h3>@Model.Movie?.Tagline</h3>
+    }
+    </div>

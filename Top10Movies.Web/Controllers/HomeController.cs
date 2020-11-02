@@ -24,11 +24,11 @@ namespace Top10Movies.Web.Controllers
             _movieRepository = movieRepository;
         }
 
-        public IActionResult Index(int ListId)
+        public IActionResult Index(int movieId)
         {
             var ViewModel = new Top10MoviesListViewModel()
             {
-                Movie = _movieRepository.GetMovieById(2323).Result
+                Movie = _movieRepository.GetMovieById(movieId).Result
             };
 
             return View(ViewModel);

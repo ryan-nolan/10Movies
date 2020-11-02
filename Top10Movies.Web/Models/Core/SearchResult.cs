@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace Top10Movies.Web.Models.Core
+namespace TenMovies.Web.Models.Core
 {
     public class SearchResult
     {

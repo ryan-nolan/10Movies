@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Top10Movies.Web.Models.Core;
+using TenMovies.Web.Models.Core;
 
-namespace Top10Movies.Web.Data
+namespace TenMovies.Web.Data
 {
     public class MovieDbContext : DbContext
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Top10Movies.Web.Models.Core
+namespace TenMovies.Web.Models.Core
 {
     public class Genre
     {

@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Top10Movies.Web.Models.Services;
-using Top10Movies.Web.Models.ViewModels;
+using TenMovies.Web.Models.Services;
+using TenMovies.Web.Models.ViewModels;
 
-namespace Top10Movies.Web.Controllers
+namespace TenMovies.Web.Controllers
 {
     public class HomeController : Controller
     {

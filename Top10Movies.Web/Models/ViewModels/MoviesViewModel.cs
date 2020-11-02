@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Top10Movies.Web.Models.Core;
+using TenMovies.Web.Models.Core;
 
-namespace Top10Movies.Web.Models.ViewModels
+namespace TenMovies.Web.Models.ViewModels
 {
     public class MoviesViewModel
     {

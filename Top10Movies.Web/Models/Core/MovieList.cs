@@ -1,4 +1,4 @@
-﻿namespace Top10Movies.Web.Models.Core
+﻿namespace TenMovies.Web.Models.Core
 {
     public class MovieList
     {

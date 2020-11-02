@@ -1,4 +1,4 @@
-namespace Top10Movies.Web.Models.ViewModels
+namespace TenMovies.Web.Models.ViewModels
 {
     public class ErrorViewModel
     {

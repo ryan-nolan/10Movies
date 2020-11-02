@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Top10Movies.Web.Models.Core;
+using TenMovies.Web.Models.Core;
 
-namespace Top10Movies.Web.Models.Clients
+namespace TenMovies.Web.Models.Clients
 {
     public interface IMovieApiClient
     {

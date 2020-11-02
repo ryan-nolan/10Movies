@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Top10Movies.Web
+namespace TenMovies.Web
 {
     public class Program
     {

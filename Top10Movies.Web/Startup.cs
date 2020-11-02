@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Top10Movies.Web.Models.Clients;
-using Top10Movies.Web.Models.Services;
+using TenMovies.Web.Models.Clients;
+using TenMovies.Web.Models.Services;
 
 
-namespace Top10Movies.Web
+namespace TenMovies.Web
 {
     public class Startup
     {

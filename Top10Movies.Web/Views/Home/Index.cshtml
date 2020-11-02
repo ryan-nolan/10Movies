@@ -4,9 +4,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1>@Model.Movie.Id</h1>
+    <h1>@Model.Movie.Title</h1>
+    <h3>@Model.Movie.Tagline</h3>
 </div>
-@foreach (var m in Model.Movies)
-{
-    <h1>@m.Title</h1>
-}

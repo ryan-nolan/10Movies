@@ -8,7 +8,7 @@ namespace Top10Movies.Web.Models
 {
     public interface IMovieRepository
     {
-        Movie GetMyovieById(int id);
+        Task<Movie> GetMovieById(int id);
         Movie CreateMovie(Movie m);
         Movie DeleteMovieById(int id);
         Movie DeleteMovie(Movie m);

@@ -14,8 +14,9 @@
 <div class="text-center">
     @if (Model.Movie != null && Model.Movie?.Id != 0)
     {
-        <h1>@Model.Movie?.Id</h1>
-        <h1>@Model.Movie?.Title</h1>
-        <h3>@Model.Movie?.Tagline</h3>
+        <h1>@Model.Movie.Id</h1>
+        <h1>@Model.Movie.Title</h1>
+        <h3>@Model.Movie.Tagline</h3>
+        <h3>@Model.Movie.ImdbId</h3>
     }
     </div>

@@ -9,6 +9,7 @@ namespace Top10Movies.Web.Models
     public interface IMovieApiService
     {
         Task<Movie> GetMovieById(int id);
+        Task<Movie> GetMovieByImdbId(string imdbId);
         Task<Movie> GetMovieByTitle(string title);
     }
 }

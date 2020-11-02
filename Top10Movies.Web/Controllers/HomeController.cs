@@ -29,6 +29,7 @@ namespace Top10Movies.Web.Controllers
             var ViewModel = new Top10MoviesListViewModel()
             {
                 Movie = _movieRepository.GetMovieById(movieId).Result
+                //Movie = _movieRepository.GetMovieByImdbId("tt13143964").Result
             };
 
             return View(ViewModel);

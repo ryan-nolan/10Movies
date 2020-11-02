@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Top10Movies.Web.Models;
+using Top10Movies.Web.Models.Core;
 using Top10Movies.Web.Models.ViewModels;
 
 namespace Top10Movies.Web.Controllers
@@ -25,7 +26,7 @@ namespace Top10Movies.Web.Controllers
         {
             var ViewModel = new Top10MoviesListViewModel()
             {
-                Movies = _top10MoviesRepository.GetAllMoviesInTop10() as List<Movie>
+                Movies = _top10MoviesRepository.GetAllMoviesInTop10(ListId) as List<Movie>
             };
 
             return View(ViewModel);

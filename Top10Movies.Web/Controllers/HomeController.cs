@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Top10Movies.Web.Models.Clients;
 using Top10Movies.Web.Models.Services;
 using Top10Movies.Web.Models.ViewModels;
 
@@ -22,16 +21,17 @@ namespace Top10Movies.Web.Controllers
         
         public IActionResult Movies(string searchTerm)
         {
-            MoviesViewModel viewModel = null;
-            if (!string.IsNullOrEmpty(searchTerm))
+            if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                viewModel = new MoviesViewModel()
+                MoviesViewModel viewModel = new MoviesViewModel()
                 {
                     Movies = _movieApiService.GetMoviesBySearchTermAsync(searchTerm).Result,
                     SearchTerm = searchTerm
                 };
+                return View(viewModel);
             }
-            return View(viewModel);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

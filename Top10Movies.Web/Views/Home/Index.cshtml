@@ -17,7 +17,7 @@
         @foreach (var movie in Model.Movies)
         {
             <div>
-                <h3>@movie.Title</h3>
+                <h3>@movie.Title (@movie.ReleaseDate.Substring(0,4))</h3>
                 <p>@movie.Overview</p>
             </div>
         }

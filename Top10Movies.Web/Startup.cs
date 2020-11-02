@@ -27,8 +27,8 @@ namespace Top10Movies.Web
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();
+
             services.AddTransient<IMovieApiService, MovieApiService>();
-            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

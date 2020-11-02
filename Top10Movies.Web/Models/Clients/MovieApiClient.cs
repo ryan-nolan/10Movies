@@ -6,20 +6,20 @@ using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using Top10Movies.Web.Models.Core;
 
-namespace Top10Movies.Web.Models.Services
+namespace Top10Movies.Web.Models.Clients
 {
-    public class MovieApiService : IMovieApiService
+    public class MovieApiClient : IMovieApiClient
     {
         private readonly IConfiguration _config;
         private readonly string _apiKey;
-        public MovieApiService(IConfiguration config)
+        public MovieApiClient(IConfiguration config)
         {
             _config = config;
             _apiKey = config["MoviesApiKey"];
         }
-        public async Task<Movie> GetMovieById(int? id)
+        public async Task<Movie> GetMovieByIdAsync(int? id)
         {
-            Movie m = null;
+            
             if (id != null & id != 0)
             {
                 string requestUri = $"https://api.themoviedb.org/3/movie/{id.Value}?api_key={_apiKey}&language=en-US";
@@ -28,16 +28,15 @@ namespace Top10Movies.Web.Models.Services
                     using (var response = await httpClient.GetAsync(requestUri))
                     {
                         string apiResponse = await response.Content.ReadAsStringAsync();
-                        m = JsonSerializer.Deserialize<Movie>(apiResponse);
+                        return JsonSerializer.Deserialize<Movie>(apiResponse);
                     }
                 }
             }
-            return m;
+            return null;
         }
         //Example URI https://api.themoviedb.org/3/find/{external_id}?api_key=<<api_key>>&language=en-US&external_source=imdb_id
-        public async Task<Movie> GetMovieByImdbId(string imdbId)
+        public async Task<Movie> GetMovieByImdbIdAsync(string imdbId)
         {
-            Movie m;
             string requestUri = $"https://api.themoviedb.org/3/find/{imdbId}?api_key={_apiKey}&language=en-US&external_source=imdb_id";
             using (var httpClient = new HttpClient())
             {
@@ -46,29 +45,26 @@ namespace Top10Movies.Web.Models.Services
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     JObject json = JObject.Parse(apiResponse);
                     var jsonMovieResults = json["movie_results"][0]["id"];
-                    m = await GetMovieById(jsonMovieResults.Value<int>());
+                    return await GetMovieByIdAsync(jsonMovieResults.Value<int>());
                 }
             }
-
-            return m;
         }
 
 
         //https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Borat&include_adult=false 
         //DOCS: https://developers.themoviedb.org/3/search/search-movies
-        public async Task<IQueryable<Movie>> GetMoviesBySearchTerm(string searchTerm)
+        public async Task<IQueryable<Movie>> GetMoviesBySearchTermAsync(string searchTerm)
         {
-            IQueryable<Movie> movies;
+            //IQueryable<Movie> movies;
             string requestUri = $"https://api.themoviedb.org/3/search/movie?api_key={_apiKey}&language=en-US&query={searchTerm}&include_adult=false";
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(requestUri))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
-                    movies = JsonSerializer.Deserialize<SearchResult>(apiResponse).Movies.AsQueryable();
+                    return JsonSerializer.Deserialize<SearchResult>(apiResponse).Movies.AsQueryable();
                 }
             }
-            return movies;
         }
     }
 }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Top10Movies.Web.Models.Core;
 
@@ -20,19 +20,21 @@ namespace Top10Movies.Web.Models
             _config = config;
             _apiKey = config["MoviesApiKey"];
         }
-        public async Task<Movie> GetMovieById(int id)
+        public async Task<Movie> GetMovieById(int? id)
         {
-            Movie m;
-            string requestUri = $"https://api.themoviedb.org/3/movie/{id}?api_key={_apiKey}";
-            using (var httpClient = new HttpClient())
+            Movie m = null;
+            if (id != null & id != 0)
             {
-                using (var response = await httpClient.GetAsync(requestUri))
+                string requestUri = $"https://api.themoviedb.org/3/movie/{id.Value}?api_key={_apiKey}&language=en-US";
+                using (var httpClient = new HttpClient())
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    m = JsonConvert.DeserializeObject<Movie>(apiResponse);
+                    using (var response = await httpClient.GetAsync(requestUri))
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        m = JsonSerializer.Deserialize<Movie>(apiResponse);
+                    }
                 }
             }
-
             return m;
         }
         //Example URI https://api.themoviedb.org/3/find/{external_id}?api_key=<<api_key>>&language=en-US&external_source=imdb_id

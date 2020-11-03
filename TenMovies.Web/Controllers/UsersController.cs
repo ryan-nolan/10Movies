@@ -6,7 +6,7 @@ using TenMovies.Web.Models.Services;
 namespace TenMovies.Web.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/[controller]")]
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
@@ -15,7 +15,7 @@ namespace TenMovies.Web.Controllers
         {
             _userService = userService;
         }
-
+        [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {

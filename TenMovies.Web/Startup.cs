@@ -25,10 +25,11 @@ namespace TenMovies.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication("CookieAuthentication")
-                .AddCookie("CookieAuthentication", config =>
+                .AddCookie("CookieAuthentication", options =>
                 {
-                    config.Cookie.Name = "UserLoginCookie";
-                    config.LoginPath = "/User/Login";
+                    options.Cookie.Name = "UserLoginCookie";
+                    options.LoginPath = "/User/Login";
+                    options.ForwardSignOut = "CookieAuthentication";
                 });
 
             services.AddControllersWithViews();

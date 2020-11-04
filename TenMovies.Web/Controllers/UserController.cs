@@ -62,7 +62,7 @@ namespace TenMovies.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme); 
+            await HttpContext.SignOutAsync(); 
             return RedirectToAction("Index", new RouteValueDictionary(new { area = "", controller = "Home", action = "Index" })); }
         }
     }

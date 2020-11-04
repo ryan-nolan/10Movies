@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TenMovies.Web.Models.Core;
+using TenMovies.Web.Models.Core.MovieModels;
 
 namespace TenMovies.Web.Data
 {

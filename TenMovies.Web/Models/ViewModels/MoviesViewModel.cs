@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TenMovies.Web.Models.Core;
+using TenMovies.Web.Models.Core.MovieModels;
 
 namespace TenMovies.Web.Models.ViewModels
 {

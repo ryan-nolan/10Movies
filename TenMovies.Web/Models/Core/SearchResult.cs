@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using TenMovies.Web.Models.Core.MovieModels;
 
 namespace TenMovies.Web.Models.Core
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using TenMovies.Web.Data;
-using TenMovies.Web.Models.Core;
+using TenMovies.Web.Models.Core.MovieModels;
 
 namespace TenMovies.Web.Models.Repositories
 {

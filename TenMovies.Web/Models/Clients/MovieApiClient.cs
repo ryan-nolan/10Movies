@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using TenMovies.Web.Models.Core;
+using TenMovies.Web.Models.Core.MovieModels;
 
 namespace TenMovies.Web.Models.Clients
 {

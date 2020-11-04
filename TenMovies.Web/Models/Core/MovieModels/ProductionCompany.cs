@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TenMovies.Web.Models.Core
+namespace TenMovies.Web.Models.Core.MovieModels
 {
     public class ProductionCompany
     {

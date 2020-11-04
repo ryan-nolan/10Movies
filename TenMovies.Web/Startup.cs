@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using TenMovies.Web.Models.Clients;
 using TenMovies.Web.Models.Services;
 
@@ -21,9 +24,14 @@ namespace TenMovies.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddAuthentication("CookieAuthentication")
+                .AddCookie("CookieAuthentication", config =>
+                {
+                    config.Cookie.Name = "UserLoginCookie";
+                    config.LoginPath = "/User/Login";
+                });
 
-            //services.AddHttpClient();
+            services.AddControllersWithViews();
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();
@@ -49,6 +57,8 @@ namespace TenMovies.Web
 
             app.UseRouting();
 
+            //app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -48,9 +46,9 @@ namespace TenMovies.Web.Controllers
                     new Claim(ClaimTypes.Email, users.GetUsers().First(u => u.Username == user.Username).EmailId),
                 };
 
-                var grandmaIdentity = new ClaimsIdentity(userClaims, "User Identity");
+                var cookieAuthIdentity = new ClaimsIdentity(userClaims, "User Identity");
 
-                var userPrincipal = new ClaimsPrincipal(new[] { grandmaIdentity });
+                var userPrincipal = new ClaimsPrincipal(new[] { cookieAuthIdentity });
                 await HttpContext.SignInAsync(userPrincipal);
 
                 return RedirectToAction("Index", "Home");

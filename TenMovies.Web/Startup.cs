@@ -1,12 +1,11 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using TenMovies.Web.Models.Clients;
+using TenMovies.Web.Models.Core.User;
 using TenMovies.Web.Models.Services;
 
 
@@ -33,6 +32,9 @@ namespace TenMovies.Web
                 });
 
             services.AddControllersWithViews();
+            
+            //services.AddIdentity<User, IdentityRole>()
+            //    .AddDefaultTokenProviders();
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();

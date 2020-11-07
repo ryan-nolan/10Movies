@@ -37,6 +37,12 @@ namespace TenMovies.Web
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "Identity.Cookie";
+                options.LoginPath = "/User/Login";
+            });
+
             services.AddDbContext<IdentityDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("TenMoviesDb"));

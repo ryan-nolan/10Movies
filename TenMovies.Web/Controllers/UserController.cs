@@ -30,7 +30,7 @@ namespace TenMovies.Web.Controllers
         }
 
         [Authorize]
-        public string Users()
+        public string AuthTest()
         {
             return "You are authorized";
         }

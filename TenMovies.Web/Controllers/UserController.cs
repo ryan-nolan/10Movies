@@ -15,11 +15,13 @@ namespace TenMovies.Web.Controllers
 {
     public class UserController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UserController(UserManager<IdentityUser> userManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -40,10 +42,19 @@ namespace TenMovies.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([Bind] UserRegisterModel user)
+        public async Task<IActionResult> Login([Bind] UserRegisterModel userViewModel)
         {
+            var user = await _userManager.FindByNameAsync(userViewModel.Username);
+            if (user != null)
+            {
+               var result = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, true, false);
+               if (result.Succeeded)
+               {
+                   return RedirectToAction(nameof(Index));
+               }
+            }
 
-            return View(user);
+            return RedirectToAction(nameof(Login));
         }
 
         [HttpGet]
@@ -53,16 +64,33 @@ namespace TenMovies.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([Bind] UserRegisterModel user)
+        public async Task<IActionResult> Register([Bind] UserRegisterModel userViewModel)
         {
-            //_userManager.CreateAsync();
-            return View(user);
+            var user = new User
+            {
+                UserName = userViewModel.Username,
+                Email = "",
+
+            };
+
+            var result = await _userManager.CreateAsync(user, userViewModel.Password);
+            if (result.Succeeded)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, true, false);
+                if (signInResult.Succeeded)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+
+            return RedirectToAction(nameof(Register));
         }
 
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(); 
-            return RedirectToAction("Index", new RouteValueDictionary(new { area = "", controller = "Home", action = "Index" })); }
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
+}

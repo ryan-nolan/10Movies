@@ -25,17 +25,15 @@ namespace TenMovies.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication("CookieAuthentication")
-            //    .AddCookie("CookieAuthentication", options =>
-            //    {
-            //        options.Cookie.Name = "UserLoginCookie";
-            //        options.LoginPath = "/User/Login";
-            //        options.ForwardSignOut = "CookieAuthentication";
-            //    });
-
             services.AddControllersWithViews();
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options =>
+                {
+                    //Allow simple passwords to test accounts
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -43,8 +41,6 @@ namespace TenMovies.Web
             {
                 options.UseSqlServer(Configuration.GetConnectionString("TenMoviesDb"));
             });
-
-
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();

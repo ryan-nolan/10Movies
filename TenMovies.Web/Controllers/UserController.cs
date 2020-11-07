@@ -4,24 +4,33 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using TenMovies.Web.Data;
 using TenMovies.Web.Models.Core.User;
+using TenMovies.Web.Models.ViewModels;
 
 namespace TenMovies.Web.Controllers
 {
     public class UserController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public UserController(UserManager<IdentityUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
         [Authorize]
-        public ActionResult Users()
+        public string Users()
         {
-            var users = new User();
-            return View(users.GetUsers());
+            return "You are authorized";
         }
 
         [HttpGet]
@@ -31,29 +40,22 @@ namespace TenMovies.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([Bind] User user)
+        public async Task<IActionResult> Login([Bind] UserRegisterModel user)
         {
-            // username = anet  
-            var users = new User();
-            var allUsers = users.GetUsers().FirstOrDefault();
-            //var dbUser = users.GetUsers().Any(u => u.Username == user.Username);
 
-            if (users.GetUsers().Any(u => u.Username == user.Username))
-            {
-                var userClaims = new List<Claim>()
-                {
-                    new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Email, users.GetUsers().First(u => u.Username == user.Username).EmailId),
-                };
+            return View(user);
+        }
 
-                var cookieAuthIdentity = new ClaimsIdentity(userClaims, "User Identity");
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
 
-                var userPrincipal = new ClaimsPrincipal(new[] { cookieAuthIdentity });
-                await HttpContext.SignInAsync(userPrincipal);
-
-                return RedirectToAction("Index", "Home");
-            }
-
+        [HttpPost]
+        public async Task<IActionResult> Register([Bind] UserRegisterModel user)
+        {
+            //_userManager.CreateAsync();
             return View(user);
         }
 

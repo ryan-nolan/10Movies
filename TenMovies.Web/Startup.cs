@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TenMovies.Web.Data;
 using TenMovies.Web.Models.Clients;
 using TenMovies.Web.Models.Core.User;
 using TenMovies.Web.Models.Services;
@@ -23,18 +25,26 @@ namespace TenMovies.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication("CookieAuthentication")
-                .AddCookie("CookieAuthentication", options =>
-                {
-                    options.Cookie.Name = "UserLoginCookie";
-                    options.LoginPath = "/User/Login";
-                    options.ForwardSignOut = "CookieAuthentication";
-                });
+            //services.AddAuthentication("CookieAuthentication")
+            //    .AddCookie("CookieAuthentication", options =>
+            //    {
+            //        options.Cookie.Name = "UserLoginCookie";
+            //        options.LoginPath = "/User/Login";
+            //        options.ForwardSignOut = "CookieAuthentication";
+            //    });
 
             services.AddControllersWithViews();
-            
-            //services.AddIdentity<User, IdentityRole>()
-            //    .AddDefaultTokenProviders();
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddDbContext<IdentityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("TenMoviesDb"));
+            });
+
+
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();

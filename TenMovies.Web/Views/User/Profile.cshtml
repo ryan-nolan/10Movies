@@ -1,0 +1,6 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TenMovies.Web.Models.Core.User
+
+@inject UserManager<User> UserManager
+
+<h2>Hi @UserManager.GetUserName(User)</h2>

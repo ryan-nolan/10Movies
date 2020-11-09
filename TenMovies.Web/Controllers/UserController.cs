@@ -30,6 +30,12 @@ namespace TenMovies.Web.Controllers
         }
 
         [Authorize]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        [Authorize]
         public string AuthTest()
         {
             return "You are authorized";
@@ -47,13 +53,14 @@ namespace TenMovies.Web.Controllers
             var user = await _userManager.FindByNameAsync(userViewModel.Username);
             if (user != null)
             {
-               var result = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, true, false);
-               if (result.Succeeded)
-               {
-                   return RedirectToAction(nameof(Index));
-               }
+                var result = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, true, false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Profile));
+                }
             }
 
+            TempData["LoginAttempt"] = "FAILED";
             return RedirectToAction(nameof(Login));
         }
 
@@ -79,18 +86,20 @@ namespace TenMovies.Web.Controllers
                 var signInResult = await _signInManager.PasswordSignInAsync(user, userViewModel.Password, true, false);
                 if (signInResult.Succeeded)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Profile));
                 }
             }
-
+            TempData["LoginAttempt"] = "FAILED";
             return RedirectToAction(nameof(Register));
         }
 
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
     }
 }

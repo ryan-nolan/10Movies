@@ -9,7 +9,7 @@
     <form asp-controller="User" asp-action="Logout" method="get" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li style="padding-left: 5px">
-                <a asp-controller="User" asp-action="Index" title="Manage">@UserManager.GetUserName(User)</a>
+                <a asp-controller="User" asp-action="Profile" title="Manage">@UserManager.GetUserName(User)</a>
             </li>
             <li style="padding-left: 5px">
                 <a asp-controller="User" asp-action="Logout" title="Manage">Logout</a>
@@ -20,7 +20,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-controller="User" asp-action="Register">Register</a></li>
-        <li padding-left: 5px><a asp-controller="User" asp-action="Login">Log in</a></li>
+        <li><a asp-controller="User" asp-action="Login">Log in</a></li>
+        <li style="padding-left: 5px"><a asp-controller="User" asp-action="Register">Register</a></li>
     </ul>
 }

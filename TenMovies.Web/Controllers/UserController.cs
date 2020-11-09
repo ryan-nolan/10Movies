@@ -48,7 +48,7 @@ namespace TenMovies.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([Bind] UserRegisterModel userViewModel)
+        public async Task<IActionResult> Login([Bind] UserRegisterViewModel userViewModel)
         {
             var user = await _userManager.FindByNameAsync(userViewModel.Username);
             if (user != null)
@@ -71,7 +71,7 @@ namespace TenMovies.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register([Bind] UserRegisterModel userViewModel)
+        public async Task<IActionResult> Register([Bind] UserRegisterViewModel userViewModel)
         {
             var user = new User
             {

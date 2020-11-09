@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TenMovies.Web.Models.ViewModels
 {
-    public class UserRegisterModel
+    public class UserRegisterViewModel
     {
         [Required]
         public string Username { get; set; }

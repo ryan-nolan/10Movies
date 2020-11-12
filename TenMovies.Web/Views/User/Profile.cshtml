@@ -1,6 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using TenMovies.Web.Models.User
+@model IEnumerable<TenMovies.Web.Models.MovieModels.MovieList>
 
 @inject UserManager<User> UserManager
 
 <h2>Hi @UserManager.GetUserName(User)</h2>
+<hr />
+
+<div style="text-align: right">
+    <a asp-action="CreateNewList" asp-controller="List" asp>Create New List</a>
+</div>
+
+@foreach (var l in Model)
+{
+    <h3>@l.Title</h3>
+}

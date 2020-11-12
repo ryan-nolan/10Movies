@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using TenMovies.Web.Clients;
 using TenMovies.Web.Data;
 using TenMovies.Web.Models.User;
+using TenMovies.Web.Repositories;
 using TenMovies.Web.Services;
 
 
@@ -55,6 +56,7 @@ namespace TenMovies.Web
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();
+            services.AddScoped<IMovieListRepository, EFMovieListRepository>();
 
             services.AddTransient<IMovieApiService, MovieApiService>();
         }

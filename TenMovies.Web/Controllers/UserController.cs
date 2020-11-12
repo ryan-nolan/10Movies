@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,8 +9,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using TenMovies.Web.Data;
+using TenMovies.Web.Models.MovieModels;
 using TenMovies.Web.Models.User;
 using TenMovies.Web.Models.ViewModels;
+using TenMovies.Web.Repositories;
 
 namespace TenMovies.Web.Controllers
 {
@@ -17,11 +20,13 @@ namespace TenMovies.Web.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IMovieListRepository _efMovieListRepository;
 
-        public UserController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(UserManager<User> userManager, SignInManager<User> signInManager, IMovieListRepository efMovieListRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _efMovieListRepository = efMovieListRepository;
         }
 
         public IActionResult Index()
@@ -31,6 +36,14 @@ namespace TenMovies.Web.Controllers
 
         [Authorize]
         public IActionResult Profile()
+        {
+            //GET All User Lists
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            IEnumerable<MovieList> userLists = _efMovieListRepository.GetAllListsForUser(Guid.Parse(userId));//User lists
+            return View(userLists);
+        }
+        [Authorize]
+        public IActionResult Account()
         {
             return View();
         }

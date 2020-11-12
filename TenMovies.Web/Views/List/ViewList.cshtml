@@ -1,0 +1,15 @@
+﻿@model TenMovies.Web.Models.MovieModels.MovieList
+
+@{
+    ViewBag.Title = "Create New List";
+    Layout = "_Layout";
+}
+
+<div>
+    <h2>@Model.Title</h2>
+    <p>@Model.Description</p>
+</div>
+
+<div>
+    <a asp-controller="User" asp-action="Profile">Go back to profile</a>
+</div>

@@ -21,6 +21,7 @@ namespace TenMovies.Web.Controllers
         {
             _efMovieListRepository = efMovieListRepository;
         }
+
         public IActionResult CreateNewList()
         {
             return View();
@@ -36,6 +37,12 @@ namespace TenMovies.Web.Controllers
                 return RedirectToAction("Profile", "User");
             }
             return View();
+        }
+
+        public IActionResult ViewList(int movieListId)
+        {
+            var movieList = _efMovieListRepository.GetListById(movieListId);
+            return View(movieList);
         }
     }
 }

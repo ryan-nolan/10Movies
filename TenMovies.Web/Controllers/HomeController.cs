@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TenMovies.Web.Models.ViewModels;
@@ -25,7 +26,7 @@ namespace TenMovies.Web.Controllers
             {
                 MoviesViewModel viewModel = new MoviesViewModel()
                 {
-                    Movies = _movieApiService.GetMoviesBySearchTermAsync(searchTerm).Result,
+                    Movies = _movieApiService.GetMoviesBySearchTermAsync(searchTerm).Result.OrderByDescending(m => m.Popularity),
                     SearchTerm = searchTerm
                 };
                 return View(viewModel);

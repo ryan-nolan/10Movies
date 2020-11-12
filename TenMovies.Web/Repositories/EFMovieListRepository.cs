@@ -8,12 +8,12 @@ using TenMovies.Web.Models.User;
 
 namespace TenMovies.Web.Repositories
 {
-    public class EFMovieListRepository : IMovieListRepository
+    public class EfMovieListRepository : IMovieListRepository
     {
         private readonly MovieDbContext _context;
         //private readonly UserManager<User> _userManager;
 
-        public EFMovieListRepository(MovieDbContext context)
+        public EfMovieListRepository(MovieDbContext context)
         {
             _context = context;
         }

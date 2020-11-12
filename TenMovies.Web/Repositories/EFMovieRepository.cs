@@ -5,11 +5,11 @@ using TenMovies.Web.Models.MovieModels;
 
 namespace TenMovies.Web.Repositories
 {
-    public class EFMovieRepository : IMovieRepository
+    public class EfMovieRepository : IMovieRepository
     {
         private readonly MovieDbContext _context;
 
-        public EFMovieRepository(MovieDbContext context)
+        public EfMovieRepository(MovieDbContext context)
         {
             _context = context;
         }

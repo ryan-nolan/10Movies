@@ -31,6 +31,9 @@ namespace TenMovies.Web.Controllers
         public IActionResult CreateNewList([Bind] MovieList list)
         {
             list.UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            list.OwnerUsername = User.FindFirstValue(ClaimTypes.Name);
+            list.DateCreated = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 _efMovieListRepository.AddList(list);
@@ -42,6 +45,10 @@ namespace TenMovies.Web.Controllers
         public IActionResult ViewList(int movieListId)
         {
             var movieList = _efMovieListRepository.GetListById(movieListId);
+            if (movieList.IsPrivate && movieList.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            {
+                return Forbid();
+            }
             return View(movieList);
         }
     }

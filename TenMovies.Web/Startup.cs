@@ -43,6 +43,7 @@ namespace TenMovies.Web
             {
                 options.Cookie.Name = "Identity.Cookie";
                 options.LoginPath = "/User/Login";
+                options.AccessDeniedPath = "/User/AccessDenied";
             });
 
             services.AddDbContext<IdentityDbContext>(options =>

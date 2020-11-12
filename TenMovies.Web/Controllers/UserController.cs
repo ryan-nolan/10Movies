@@ -47,6 +47,10 @@ namespace TenMovies.Web.Controllers
         {
             return View();
         }
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
         [Authorize]
         public string AuthTest()

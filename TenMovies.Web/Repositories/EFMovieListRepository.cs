@@ -1,27 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using TenMovies.Web.Data;
 using TenMovies.Web.Models.MovieModels;
+using TenMovies.Web.Models.User;
 
 namespace TenMovies.Web.Repositories
 {
     public class EFMovieListRepository : IMovieListRepository
     {
-        private readonly MovieDbContext context;
+        private readonly MovieDbContext _context;
+        //private readonly UserManager<User> _userManager;
 
         public EFMovieListRepository(MovieDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
-        public IEnumerable<Movie> GetAllMoviesInTop10(int movieListId)
+        public IEnumerable<MovieList> GetAllListsForUser(Guid userGuid)
         {
-            return context.Movies.Where(m => m.MovieListId == movieListId);
+            return _context.MovieLists.Where(l => l.UserId == userGuid);
+        }
+
+        public void AddList(MovieList list)
+        {
+            _context.MovieLists.Add(list);
+            _context.SaveChanges();
+        }
+
+        public IEnumerable<Movie> GetAllMoviesInMovieList(int movieListId)
+        {
+            return _context.Movies.Where(m => m.MovieListId == movieListId);
         }
 
         public IEnumerable<MovieList> GetAllMoviesLists()
         {
-            return context.MovieLists;
+            return _context.MovieLists;
         }
     }
 }

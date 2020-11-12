@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace TenMovies.Web.Migrations
+namespace TenMovies.Web.Migrations.IdentityDb
 {
-    public partial class NewUserModel : Migration
+    public partial class InitialCreateIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

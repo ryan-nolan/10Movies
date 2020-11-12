@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace TenMovies.Web.Models.MovieModels
@@ -22,7 +23,10 @@ namespace TenMovies.Web.Models.MovieModels
         public int Budget { get; set; }
 
         [JsonPropertyName("genres")]
+        [NotMapped]
         public List<Genre> Genres { get; set; }
+
+        public int GenreId => Genres.First().Id;
 
         [JsonPropertyName("homepage")]
         public string Homepage { get; set; }

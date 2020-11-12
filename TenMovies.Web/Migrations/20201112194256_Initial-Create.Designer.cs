@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TenMovies.Web.Data;
 
-namespace TenMovies.Web.Migrations.MovieDb
+namespace TenMovies.Web.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20201112190502_Movie-List-Relationship")]
-    partial class MovieListRelationship
+    [Migration("20201112194256_Initial-Create")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,26 +20,6 @@ namespace TenMovies.Web.Migrations.MovieDb
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("TenMovies.Web.Models.MovieModels.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId");
-
-                    b.ToTable("Genre");
-                });
 
             modelBuilder.Entity("TenMovies.Web.Models.MovieModels.Movie", b =>
                 {
@@ -129,13 +109,6 @@ namespace TenMovies.Web.Migrations.MovieDb
                     b.HasKey("Id");
 
                     b.ToTable("MovieLists");
-                });
-
-            modelBuilder.Entity("TenMovies.Web.Models.MovieModels.Genre", b =>
-                {
-                    b.HasOne("TenMovies.Web.Models.MovieModels.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
                 });
 #pragma warning restore 612, 618
         }

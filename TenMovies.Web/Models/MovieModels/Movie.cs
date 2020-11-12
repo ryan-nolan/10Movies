@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -94,5 +95,8 @@ namespace TenMovies.Web.Models.MovieModels
 
         [JsonIgnore]
         public int MovieListId { get; set; }
+
+        [JsonIgnore]
+        public DateTime DateAdded { get; set; }
     }
 }

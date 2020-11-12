@@ -10,6 +10,9 @@ namespace TenMovies.Web.Models.MovieModels
     {
         public int Id { get; set; }
         [MaxLength(30)]
+
+        public string OwnerUsername { get; set; }
+        public DateTime DateCreated { get; set; }
         public string Title { get; set; }
 
         [MaxLength(200)]

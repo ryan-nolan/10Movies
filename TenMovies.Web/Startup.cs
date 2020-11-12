@@ -48,6 +48,10 @@ namespace TenMovies.Web
             {
                 options.UseSqlServer(Configuration.GetConnectionString("TenMoviesDb"));
             });
+            services.AddDbContext<MovieDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("TenMoviesDb"));
+            });
 
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();

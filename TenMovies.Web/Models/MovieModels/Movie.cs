@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace TenMovies.Web.Models.MovieModels
@@ -13,6 +15,7 @@ namespace TenMovies.Web.Models.MovieModels
         public string BackdropPath { get; set; }
 
         [JsonPropertyName("belongs_to_collection")]
+        [NotMapped]
         public object BelongsToCollection { get; set; }
 
         [JsonPropertyName("budget")]
@@ -25,6 +28,7 @@ namespace TenMovies.Web.Models.MovieModels
         public string Homepage { get; set; }
 
         [JsonPropertyName("id")]
+        [Key]
         public int Id { get; set; }
 
         [JsonPropertyName("imdb_id")]
@@ -46,9 +50,11 @@ namespace TenMovies.Web.Models.MovieModels
         public string PosterPath { get; set; }
 
         [JsonPropertyName("production_companies")]
+        [NotMapped]
         public List<ProductionCompany> ProductionCompanies { get; set; }
 
         [JsonPropertyName("production_countries")]
+        [NotMapped]
         public List<ProductionCountry> ProductionCountries { get; set; }
 
         [JsonPropertyName("release_date")]
@@ -61,6 +67,7 @@ namespace TenMovies.Web.Models.MovieModels
         public int Runtime { get; set; }
 
         [JsonPropertyName("spoken_languages")]
+        [NotMapped]
         public List<SpokenLanguage> SpokenLanguages { get; set; }
 
         [JsonPropertyName("status")]
@@ -81,6 +88,7 @@ namespace TenMovies.Web.Models.MovieModels
         [JsonPropertyName("vote_count")]
         public int VoteCount { get; set; }
 
+        [JsonIgnore]
         public int MovieListId { get; set; }
     }
 }

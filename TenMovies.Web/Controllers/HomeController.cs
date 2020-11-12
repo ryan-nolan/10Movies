@@ -24,7 +24,7 @@ namespace TenMovies.Web.Controllers
         {
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
-                MoviesViewModel viewModel = new MoviesViewModel()
+                MoviesViewModel viewModel = new MoviesViewModel
                 {
                     Movies = _movieApiService.GetMoviesBySearchTermAsync(searchTerm).Result.OrderByDescending(m => m.Popularity),
                     SearchTerm = searchTerm

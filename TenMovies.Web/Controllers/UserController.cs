@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using TenMovies.Web.Data;
-using TenMovies.Web.Models.Core.User;
+using TenMovies.Web.Models.User;
 using TenMovies.Web.Models.ViewModels;
 
 namespace TenMovies.Web.Controllers

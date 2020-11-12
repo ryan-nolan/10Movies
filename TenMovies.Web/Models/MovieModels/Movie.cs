@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TenMovies.Web.Models.Core.MovieModels
+namespace TenMovies.Web.Models.MovieModels
 {
     // Movie myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
     public class Movie

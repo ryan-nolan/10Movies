@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TenMovies.Web.Models.Core.User;
+using TenMovies.Web.Models.User;
 
 namespace TenMovies.Web.Data
 {

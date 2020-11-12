@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using TenMovies.Web.Models.Clients;
-using TenMovies.Web.Models.Core.MovieModels;
+using TenMovies.Web.Clients;
+using TenMovies.Web.Models.MovieModels;
 
-namespace TenMovies.Web.Models.Services
+namespace TenMovies.Web.Services
 {
     public class MovieApiService : IMovieApiService
     {

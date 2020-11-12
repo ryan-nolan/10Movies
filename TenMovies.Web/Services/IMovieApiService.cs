@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using TenMovies.Web.Models.Core.MovieModels;
+using TenMovies.Web.Models.MovieModels;
 
-namespace TenMovies.Web.Models.Clients
+namespace TenMovies.Web.Services
 {
-    public interface IMovieApiClient
+    public interface IMovieApiService
     {
         Task<Movie> GetMovieByIdAsync(int? id);
         Task<Movie> GetMovieByImdbIdAsync(string imdbId);

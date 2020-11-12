@@ -10,7 +10,15 @@
             <div>
                 <h3>@movie.Title (@((!string.IsNullOrEmpty(movie.ReleaseDate)) ? @movie.ReleaseDate.Substring(0,4) : "N/A"))</h3>
                 <p>@movie.Overview</p>
-                <img src="https://image.tmdb.org/t/p/w500/@movie.PosterPath"/>
+                @if (movie.PosterPath != null)
+                {
+                    <img src="https://image.tmdb.org/t/p/w500/@movie.PosterPath" />
+                }
+                else
+                {
+                    //Placeholder image
+                }
+
             </div>
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TenMovies.Web.Data;
-using TenMovies.Web.Models.Core.MovieModels;
+using TenMovies.Web.Models.MovieModels;
 
-namespace TenMovies.Web.Models.Repositories
+namespace TenMovies.Web.Repositories
 {
     public class EFMovieListRepository : IMovieListRepository
     {

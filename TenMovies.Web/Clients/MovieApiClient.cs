@@ -4,10 +4,9 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
-using TenMovies.Web.Models.Core;
-using TenMovies.Web.Models.Core.MovieModels;
+using TenMovies.Web.Models.MovieModels;
 
-namespace TenMovies.Web.Models.Clients
+namespace TenMovies.Web.Clients
 {
     public class MovieApiClient : IMovieApiClient
     {

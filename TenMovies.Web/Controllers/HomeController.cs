@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TenMovies.Web.Models.Services;
 using TenMovies.Web.Models.ViewModels;
+using TenMovies.Web.Services;
 
 namespace TenMovies.Web.Controllers
 {

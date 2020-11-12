@@ -1,6 +1,6 @@
-﻿using TenMovies.Web.Models.Core.MovieModels;
+﻿using TenMovies.Web.Models.MovieModels;
 
-namespace TenMovies.Web.Models.Repositories
+namespace TenMovies.Web.Repositories
 {
     public interface IMovieRepository
     {

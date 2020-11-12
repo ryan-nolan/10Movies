@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TenMovies.Web.Clients;
 using TenMovies.Web.Data;
-using TenMovies.Web.Models.Clients;
-using TenMovies.Web.Models.Core.User;
-using TenMovies.Web.Models.Services;
+using TenMovies.Web.Models.User;
+using TenMovies.Web.Services;
 
 
 namespace TenMovies.Web

@@ -11,5 +11,6 @@ namespace TenMovies.Web.Repositories
         IEnumerable<MovieList> GetAllListsForUser(Guid userGuid);
 
         void AddList(MovieList list);
+        MovieList GetListById(int id);
     }
 }

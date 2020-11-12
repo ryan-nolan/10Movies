@@ -29,6 +29,11 @@ namespace TenMovies.Web.Repositories
             _context.SaveChanges();
         }
 
+        public MovieList GetListById(int id)
+        {
+            return _context.MovieLists.First(l => l.Id == id);
+        }
+
         public IEnumerable<Movie> GetAllMoviesInMovieList(int movieListId)
         {
             return _context.Movies.Where(m => m.MovieListId == movieListId);

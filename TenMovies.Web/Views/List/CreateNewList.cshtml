@@ -22,6 +22,11 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="IsPrivate" class="control-label"></label>
+                <input style="justify-content: left" asp-for="IsPrivate" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create New List" class="btn btn-default btn-primary" />
             </div>
         </form>

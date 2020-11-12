@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using TenMovies.Web.Models.MovieModels;
 using TenMovies.Web.Models.User;
+using TenMovies.Web.Models.ViewModels;
 using TenMovies.Web.Repositories;
 
 namespace TenMovies.Web.Controllers
@@ -44,12 +45,18 @@ namespace TenMovies.Web.Controllers
 
         public IActionResult ViewList(int movieListId)
         {
-            var movieList = _efMovieListRepository.GetListById(movieListId);
-            if (movieList.IsPrivate && movieList.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            MoviesAndListViewModel moviesAndListView = new MoviesAndListViewModel
+            {
+                Movies = _efMovieListRepository.GetAllMoviesInMovieList(movieListId),
+                MovieList = _efMovieListRepository.GetListById(movieListId)
+            };
+
+            if (moviesAndListView.MovieList.IsPrivate 
+                && moviesAndListView.MovieList.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return Forbid();
             }
-            return View(movieList);
+            return View(moviesAndListView);
         }
     }
 }

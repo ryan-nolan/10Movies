@@ -1,0 +1,18 @@
+﻿@model TenMovies.Web.Models.MovieModels.Movie
+@{
+    ViewBag.Title = "Create New List";
+    Layout = "_Layout";
+}
+<h2>Add @Model.Title to a list</h2>
+<hr />
+@*Use Movie Partial*@
+<h3>@Model.Title (@((!string.IsNullOrEmpty(Model.ReleaseDate)) ? Model.ReleaseDate.Substring(0, 4) : "N/A"))</h3>
+<p>@Model.Overview</p>
+@if (!string.IsNullOrEmpty(Model.PosterPath))
+{
+    <img src="https://image.tmdb.org/t/p/w500/@Model.PosterPath" />
+}
+else
+{
+    //Placeholder image
+}

@@ -10,6 +10,7 @@ using TenMovies.Web.Models.MovieModels;
 using TenMovies.Web.Models.User;
 using TenMovies.Web.Models.ViewModels;
 using TenMovies.Web.Repositories;
+using TenMovies.Web.Services;
 
 namespace TenMovies.Web.Controllers
 {
@@ -17,10 +18,14 @@ namespace TenMovies.Web.Controllers
     public class ListController : Controller
     {
         private readonly IMovieListRepository _efMovieListRepository;
+        private readonly IMovieRepository _efMovieRepository;
+        private readonly IMovieApiService _movieApiService;
 
-        public ListController(IMovieListRepository efMovieListRepository)
+        public ListController(IMovieListRepository efMovieListRepository, IMovieRepository efMovieRepository, IMovieApiService movieApiService)
         {
             _efMovieListRepository = efMovieListRepository;
+            _efMovieRepository = efMovieRepository;
+            _movieApiService = movieApiService;
         }
 
         public IActionResult CreateNewList()
@@ -57,6 +62,13 @@ namespace TenMovies.Web.Controllers
                 return Forbid();
             }
             return View(moviesAndListView);
+        }
+
+
+        public async Task<IActionResult> AddMovieToList(int movieId)
+        {
+            var movie = await _movieApiService.GetMovieByIdAsync(movieId);
+            return View(movie);
         }
     }
 }

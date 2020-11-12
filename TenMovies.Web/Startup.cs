@@ -58,6 +58,7 @@ namespace TenMovies.Web
             services.AddHttpClient<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieApiClient, MovieApiClient>();
             services.AddScoped<IMovieListRepository, EfMovieListRepository>();
+            services.AddScoped<IMovieRepository, EfMovieRepository>();
 
             services.AddTransient<IMovieApiService, MovieApiService>();
         }

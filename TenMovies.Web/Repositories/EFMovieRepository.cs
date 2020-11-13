@@ -18,9 +18,13 @@ namespace TenMovies.Web.Repositories
             return _context.Movies.First(m => m.Id == id);
         }
 
-        public Movie CreateMovie(Movie m)
+        public Movie AddMovie(Movie m)
         {
-            throw new NotImplementedException();
+            if (m == null)
+                throw new ArgumentNullException();
+            _context.Movies.Add(m);
+            _context.SaveChanges();
+            return m;
         }
 
         public Movie DeleteMovieById(int id)
@@ -33,9 +37,5 @@ namespace TenMovies.Web.Repositories
             throw new NotImplementedException();
         }
 
-        public int SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

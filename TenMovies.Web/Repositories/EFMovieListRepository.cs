@@ -34,6 +34,11 @@ namespace TenMovies.Web.Repositories
             return _context.MovieLists.First(l => l.Id == id);
         }
 
+        public bool IsDuplicate(int movieId, int listId)
+        {
+            return _context.Movies.Any(m => m.Id == movieId && m.MovieListId == listId);
+        }
+
         public IEnumerable<Movie> GetAllMoviesInMovieList(int movieListId)
         {
             return _context.Movies.Where(m => m.MovieListId == movieListId);

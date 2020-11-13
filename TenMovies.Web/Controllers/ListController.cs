@@ -56,7 +56,7 @@ namespace TenMovies.Web.Controllers
                 MovieList = _efMovieListRepository.GetListById(movieListId)
             };
 
-            if (moviesAndListView.MovieList.IsPrivate 
+            if (moviesAndListView.MovieList.IsPrivate
                 && moviesAndListView.MovieList.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
             {
                 return Forbid();
@@ -67,8 +67,46 @@ namespace TenMovies.Web.Controllers
 
         public async Task<IActionResult> AddMovieToList(int movieId)
         {
-            var movie = await _movieApiService.GetMovieByIdAsync(movieId);
-            return View(movie);
+            AddMovieToListViewModel addMovieToListViewModel = new AddMovieToListViewModel
+            {
+                MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieId),
+                UsersMovieLists =
+                    _efMovieListRepository.GetAllListsForUser(
+                        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))),
+            };
+            return View(addMovieToListViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMovieToList([Bind] AddMovieToListViewModel movieToListViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_efMovieListRepository.IsDuplicate(movieToListViewModel.MovieId, movieToListViewModel.ListId))
+                {
+                    TempData["FailMessage"] = "This movie is already in the list";
+                    return View(new AddMovieToListViewModel
+                    {
+                        MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId),
+                        UsersMovieLists =
+                            _efMovieListRepository.GetAllListsForUser(
+                                Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))),
+                    });
+                }
+                Movie m = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId);
+                m.MovieListId = movieToListViewModel.ListId;
+                _efMovieRepository.AddMovie(m);
+                return RedirectToAction("ViewList", "List", new { movieListId = movieToListViewModel.ListId });//Eventually redirect to their own list 
+            }
+            TempData["FailMessage"] = "MovieAddAttemptFailed";
+            return View(new AddMovieToListViewModel
+            {
+
+                MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId),
+                UsersMovieLists =
+                    _efMovieListRepository.GetAllListsForUser(
+                        Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))),
+            });
         }
     }
 }

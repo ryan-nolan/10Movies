@@ -21,5 +21,7 @@ namespace TenMovies.Web.Models.MovieModels
 
         [DisplayName("Make List Private?")]
         public bool IsPrivate { get; set; }
+
+        public override string ToString() => Title;
     }
 }

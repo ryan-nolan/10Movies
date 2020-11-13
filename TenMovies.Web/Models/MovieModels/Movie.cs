@@ -33,8 +33,10 @@ namespace TenMovies.Web.Models.MovieModels
         public string Homepage { get; set; }
 
         [JsonPropertyName("id")]
-        [Key]
         public int Id { get; set; }
+
+        [Key]
+        public int PrimaryId { get; set; }
 
         [JsonPropertyName("imdb_id")]
         public string ImdbId { get; set; }

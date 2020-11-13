@@ -21,7 +21,7 @@ namespace TenMovies.Web.Migrations
 
             modelBuilder.Entity("TenMovies.Web.Models.MovieModels.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PrimaryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -40,6 +40,9 @@ namespace TenMovies.Web.Migrations
 
                     b.Property<string>("Homepage")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImdbId")
                         .HasColumnType("nvarchar(max)");
@@ -89,7 +92,7 @@ namespace TenMovies.Web.Migrations
                     b.Property<int>("VoteCount")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("PrimaryId");
 
                     b.ToTable("Movies");
                 });

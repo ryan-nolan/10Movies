@@ -10,7 +10,7 @@ using TenMovies.Web.Data;
 namespace TenMovies.Web.Migrations.IdentityDb
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20201112194330_Initial-Create-Identity")]
+    [Migration("20201113010833_InitialCreateIdentity")]
     partial class InitialCreateIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

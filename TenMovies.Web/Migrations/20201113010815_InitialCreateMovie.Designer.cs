@@ -10,8 +10,8 @@ using TenMovies.Web.Data;
 namespace TenMovies.Web.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20201112201248_ListDescription")]
-    partial class ListDescription
+    [Migration("20201113010815_InitialCreateMovie")]
+    partial class InitialCreateMovie
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace TenMovies.Web.Migrations
 
             modelBuilder.Entity("TenMovies.Web.Models.MovieModels.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PrimaryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -37,8 +37,14 @@ namespace TenMovies.Web.Migrations
                     b.Property<int>("Budget")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Homepage")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImdbId")
                         .HasColumnType("nvarchar(max)");
@@ -88,7 +94,7 @@ namespace TenMovies.Web.Migrations
                     b.Property<int>("VoteCount")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("PrimaryId");
 
                     b.ToTable("Movies");
                 });
@@ -100,13 +106,22 @@ namespace TenMovies.Web.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<string>("Title")
+                    b.Property<bool>("IsPrivate")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OwnerUsername")
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");

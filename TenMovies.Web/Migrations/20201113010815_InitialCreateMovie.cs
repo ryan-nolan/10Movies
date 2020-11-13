@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TenMovies.Web.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreateMovie : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,8 +13,12 @@ namespace TenMovies.Web.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    OwnerUsername = table.Column<string>(maxLength: 30, nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false)
+                    Description = table.Column<string>(maxLength: 200, nullable: true),
+                    UserId = table.Column<Guid>(nullable: false),
+                    IsPrivate = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,12 +29,13 @@ namespace TenMovies.Web.Migrations
                 name: "Movies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    PrimaryId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Adult = table.Column<bool>(nullable: false),
                     BackdropPath = table.Column<string>(nullable: true),
                     Budget = table.Column<int>(nullable: false),
                     Homepage = table.Column<string>(nullable: true),
+                    Id = table.Column<int>(nullable: false),
                     ImdbId = table.Column<string>(nullable: true),
                     OriginalLanguage = table.Column<string>(nullable: true),
                     OriginalTitle = table.Column<string>(nullable: true),
@@ -46,11 +51,12 @@ namespace TenMovies.Web.Migrations
                     Video = table.Column<bool>(nullable: false),
                     VoteAverage = table.Column<double>(nullable: false),
                     VoteCount = table.Column<int>(nullable: false),
-                    MovieListId = table.Column<int>(nullable: false)
+                    MovieListId = table.Column<int>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movies", x => x.Id);
+                    table.PrimaryKey("PK_Movies", x => x.PrimaryId);
                 });
         }
 

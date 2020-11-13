@@ -7,7 +7,9 @@
 <hr />
 @if (TempData["LoginAttempt"] != null)
 {
-    <div style="text-align: left; color: red">Login Failed</div>
+    <div class="alert alert-danger" role="alert">
+        <strong>Warning!</strong> Login Failed.
+    </div>
 }
 <div class="row">
     <div class="col-md-4">

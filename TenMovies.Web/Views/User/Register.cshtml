@@ -9,7 +9,9 @@
 <hr />
 @if (TempData["LoginAttempt"] != null)
 {
-    <div style="text-align: left; color: red">Registration Failed</div>
+    <div class="alert alert-danger" role="alert">
+        <strong>Warning!</strong> Registration Failed.
+    </div>
 }
 <div class="row">
     <div class="col-md-4">

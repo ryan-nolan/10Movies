@@ -1,0 +1,8 @@
+﻿@model MoviesAndListViewModel
+
+<h2>Editing @Model.MovieList.Title</h2>
+<hr/>
+@foreach (var m in Model.Movies)
+{
+    await Html.RenderPartialAsync("MoviePartials/_MovieEditPartial", m);
+}

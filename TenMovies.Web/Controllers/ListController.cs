@@ -114,7 +114,7 @@ namespace TenMovies.Web.Controllers
                 Movie m = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId);
                 m.MovieListId = movieToListViewModel.ListId;
                 _efMovieRepository.AddMovie(m);
-                return RedirectToAction("ViewList", "List", new { movieListId = movieToListViewModel.ListId });//Eventually redirect to their own list 
+                return RedirectToAction("EditMovieList", "List", new { movieListId = movieToListViewModel.ListId });//Eventually redirect to their own list 
             }
             TempData["ErrorMessage"] = "Movie add attempt failed";
             return View(new AddMovieToListViewModel
@@ -131,14 +131,14 @@ namespace TenMovies.Web.Controllers
         {
             //Check user is authorised
             if (movieListId == null)
-            {
                 return RedirectToAction("Profile", "User");
-            }
+
             var movieList = _efMovieListRepository.GetListById(movieListId.Value);
+            if (movieList == null)
+                return RedirectToAction("Profile", "User");
+
             if (movieList.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
-            {
                 return Unauthorized();
-            }
 
             var vm = new MoviesAndListViewModel()
             {

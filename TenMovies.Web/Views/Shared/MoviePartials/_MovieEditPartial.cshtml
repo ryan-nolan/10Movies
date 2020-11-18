@@ -1,0 +1,10 @@
+﻿@model TenMovies.Web.Models.MovieModels.Movie
+
+<div>
+    <h4>@Model.Title</h4>
+    <p>@Model.Overview</p>
+    <form asp-action="RemoveMovieFromList">
+        <input type="hidden" value="@Model.PrimaryId" name="movieId"/>
+        <button class="btn btn-primary" type="submit">Remove</button>
+    </form>
+</div>

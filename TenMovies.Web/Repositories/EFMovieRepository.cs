@@ -29,7 +29,10 @@ namespace TenMovies.Web.Repositories
 
         public Movie DeleteMovieById(int id)
         {
-            throw new NotImplementedException();
+            var movie = _context.Movies.First(m => m.PrimaryId == id);
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return movie;
         }
 
         public Movie DeleteMovie(Movie m)

@@ -108,5 +108,37 @@ namespace TenMovies.Web.Controllers
                         Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))),
             });
         }
+
+        public IActionResult EditMovieList(int? movieListId)
+        {
+            //Check user is authorised
+            if (movieListId == null)
+            {
+                return RedirectToAction("Profile", "User");
+            }
+            var movieList = _efMovieListRepository.GetListById(movieListId.Value);
+            if (movieList.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
+            {
+                return Unauthorized();
+            }
+
+            var vm = new MoviesAndListViewModel()
+            {
+                MovieList = movieList,
+                Movies = _efMovieListRepository.GetAllMoviesInMovieList(movieList.Id)
+            };
+            return View(vm);
+        }
+
+        public IActionResult RemoveMovieFromList(int? movieId)
+        {
+            if (movieId == null)
+            {
+                return RedirectToAction("Index", "User");
+            }
+            var deletedMovie = _efMovieRepository.DeleteMovieById(movieId.Value);
+
+            return RedirectToAction("EditMovieList", new { movieListId = deletedMovie.MovieListId });
+        }
     }
 }

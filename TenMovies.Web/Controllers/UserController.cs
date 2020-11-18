@@ -31,7 +31,7 @@ namespace TenMovies.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction(nameof(Profile));
         }
 
         [Authorize]

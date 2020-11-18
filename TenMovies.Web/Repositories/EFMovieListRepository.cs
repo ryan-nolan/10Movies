@@ -62,6 +62,11 @@ namespace TenMovies.Web.Repositories
             return _context.Movies.Count(m => m.MovieListId == listId) >= 10;
         }
 
+        public bool DoesUserHaveLists(Guid userId)
+        {
+            return _context.MovieLists.Any(l => l.UserId == userId);
+        }
+
         public IEnumerable<Movie> GetAllMoviesInMovieList(int movieListId)
         {
             return _context.Movies.Where(m => m.MovieListId == movieListId);

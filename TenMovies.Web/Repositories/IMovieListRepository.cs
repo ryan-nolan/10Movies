@@ -17,5 +17,6 @@ namespace TenMovies.Web.Repositories
         MovieList DeleteListById(int movieListId);
         IEnumerable<MovieList> GetAllNonePrivateLists();
         bool IsFullList(int listId);
+        bool DoesUserHaveLists(Guid userId);
     }
 }

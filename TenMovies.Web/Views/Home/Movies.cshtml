@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = Model.SearchTerm;
 }
+
+@{Html.Partial("_ErrorMessagePartial", TempData["ErrorMessage"]);}
+
 <div class="text-center">
     @if (Model?.Movies != null)
     {

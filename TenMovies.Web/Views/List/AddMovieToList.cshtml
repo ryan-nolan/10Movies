@@ -6,25 +6,17 @@
 }
 <h2 style="text-align: center">Add @Model.MovieToAdd.Title to a list</h2>
 <hr />
-@if (TempData["FailMessage"] != null)
-{
-    <div class="alert alert-warning" role="alert">
-        <strong>Warning!</strong> @TempData["FailMessage"]
-    </div>
-}
+<partial model="@TempData["ErrorMessage"]" name="_ErrorMessagePartial" />
+
 @*Use Movie Partial*@
 <h3>@Model.MovieToAdd.Title (@((!string.IsNullOrEmpty(Model.MovieToAdd.ReleaseDate)) ? Model.MovieToAdd.ReleaseDate.Substring(0, 4) : "N/A"))</h3>
 <p>@Model.MovieToAdd.Overview</p>
 @if (!string.IsNullOrEmpty(Model.MovieToAdd.PosterPath))
 {
-    <img src="https://image.tmdb.org/t/p/w500/@Model.MovieToAdd.PosterPath" />
+    <img src="https://image.tmdb.org/t/p/w92/@Model.MovieToAdd.PosterPath" alt=""/>
 }
-else
-{
-    //Placeholder image
-}
-<div>
 
+<div>
 </div>
 
 <div class="row">

@@ -67,6 +67,11 @@ namespace TenMovies.Web.Controllers
 
         public async Task<IActionResult> AddMovieToList(int movieId)
         {
+            if (!_efMovieListRepository.DoesUserHaveLists(Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))))
+            {
+                TempData["ErrorMessage"] = "Please create a list before trying to add a movie";
+                return RedirectToAction("Index","Home");
+            }
             AddMovieToListViewModel addMovieToListViewModel = new AddMovieToListViewModel
             {
                 MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieId),
@@ -84,7 +89,7 @@ namespace TenMovies.Web.Controllers
             {
                 if (_efMovieListRepository.IsDuplicate(movieToListViewModel.MovieId, movieToListViewModel.ListId))
                 {
-                    TempData["FailMessage"] = "This movie is already in the list";
+                    TempData["ErrorMessage"] = "This movie is already in the list";
                     return View(new AddMovieToListViewModel
                     {
                         MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId),
@@ -96,7 +101,7 @@ namespace TenMovies.Web.Controllers
 
                 if (_efMovieListRepository.IsFullList(movieToListViewModel.ListId))
                 {
-                    TempData["FailMessage"] = "This list is full";
+                    TempData["ErrorMessage"] = "This list is full";
                     return View(new AddMovieToListViewModel
                     {
                         MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId),
@@ -111,7 +116,7 @@ namespace TenMovies.Web.Controllers
                 _efMovieRepository.AddMovie(m);
                 return RedirectToAction("ViewList", "List", new { movieListId = movieToListViewModel.ListId });//Eventually redirect to their own list 
             }
-            TempData["FailMessage"] = "MovieAddAttemptFailed";
+            TempData["ErrorMessage"] = "Movie add attempt failed";
             return View(new AddMovieToListViewModel
             {
 

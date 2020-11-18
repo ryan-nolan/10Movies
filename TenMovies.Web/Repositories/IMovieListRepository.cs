@@ -15,5 +15,6 @@ namespace TenMovies.Web.Repositories
         bool IsDuplicate(int movieId, int listId);
         MovieList GetListByMovieId(int movieId);
         MovieList DeleteListById(int movieListId);
+        IEnumerable<MovieList> GetAllNonePrivateLists();
     }
 }

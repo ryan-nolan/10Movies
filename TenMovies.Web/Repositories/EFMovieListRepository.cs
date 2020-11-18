@@ -52,6 +52,11 @@ namespace TenMovies.Web.Repositories
             return ml;
         }
 
+        public IEnumerable<MovieList> GetAllNonePrivateLists()
+        {
+            return _context.MovieLists.Where(l => l.IsPrivate == false);
+        }
+
         public IEnumerable<Movie> GetAllMoviesInMovieList(int movieListId)
         {
             return _context.Movies.Where(m => m.MovieListId == movieListId);

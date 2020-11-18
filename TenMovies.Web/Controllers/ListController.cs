@@ -134,11 +134,22 @@ namespace TenMovies.Web.Controllers
         {
             if (movieId == null)
             {
-                return RedirectToAction("Index", "User");
+                return RedirectToAction("Profile", "User");
             }
             var deletedMovie = _efMovieRepository.DeleteMovieById(movieId.Value);
 
             return RedirectToAction("EditMovieList", new { movieListId = deletedMovie.MovieListId });
+        }
+
+        public IActionResult DeleteMovieList(int? movieListId)
+        {
+            if (movieListId == null)
+            {
+                return RedirectToAction("Profile", "User");
+            }
+            var deletedList = _efMovieListRepository.DeleteListById(movieListId.Value);
+
+            return RedirectToAction("Profile", "User");
         }
     }
 }

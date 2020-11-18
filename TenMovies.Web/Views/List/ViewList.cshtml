@@ -6,16 +6,16 @@
     Layout = "_Layout";
 }
 @*<div>
-    <a asp-controller="User" asp-action="Profile"><i class="fa fa-home"></i> Profile</a>
-</div>*@
+        <a asp-controller="User" asp-action="Profile"><i class="fa fa-home"></i> Profile</a>
+    </div>*@
 <h2 style="text-align: center">Viewing @Model.MovieList.Title by @Model.MovieList.OwnerUsername</h2>
-<hr/>
+<hr />
 @if (!(Model.Movies == null || !Model.Movies.Any()))
 {
     <div class="row" style="padding-bottom: 5px">
         @foreach (var m in Model.Movies)
         {
-            <div class="col-sm-6">
+            <div class="col-sm-4" style="padding: 5px">
                 <partial name="MoviePartials/_ViewMoviePartial" model="m" />
             </div>
         }
@@ -23,5 +23,5 @@
 }
 else
 {
-    <div style="text-align: center">There are no movies in this list.<br/><a asp-controller="List" asp-action="EditMovieList" asp-route-movieListId="@Model.MovieList.Id">Add movies to this list</a></div>
+    <div style="text-align: center">There are no movies in this list.<br /><a asp-controller="List" asp-action="EditMovieList" asp-route-movieListId="@Model.MovieList.Id">Add movies to this list</a></div>
 }

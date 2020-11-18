@@ -1,8 +1,25 @@
 ﻿@model MoviesAndListViewModel
 
-<h2>Editing @Model.MovieList.Title</h2>
-<hr/>
-@foreach (var m in Model.Movies)
-{
-    await Html.RenderPartialAsync("MoviePartials/_EditMoviePartial", m);
+@{
+    ViewBag.Title = "Edit";
+    Layout = "_Layout";
 }
+
+<h2 style="text-align: center">Editing @Model.MovieList.Title</h2>
+<hr />
+<form class="form-inline d-flex justify-content-center md-form form-sm" asp-action="Movies" asp-controller="Home" method="get">
+    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search for a movie" name="searchTerm" id="searchTerm"
+           aria-label="Search">
+    <button class="border-0" style="background: none" type="submit">
+        <i class="fas fa-search" aria-hidden="true"></i>
+    </button>
+</form>
+<hr />
+<div class="row" style="padding: 5px">
+    @foreach (var m in Model.Movies)
+    {
+        <div class="col-sm-4" style="padding: 5px">
+            <partial model="m" name="MoviePartials/_EditMoviePartial" />
+        </div>
+    }
+</div>

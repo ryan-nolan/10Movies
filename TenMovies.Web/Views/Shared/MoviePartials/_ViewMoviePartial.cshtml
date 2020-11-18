@@ -1,6 +1,9 @@
 ﻿@model TenMovies.Web.Models.MovieModels.Movie
-
-<div>
-    <h4>@Model.Title</h4>
-    <p>@Model.Tagline</p>
+<div class="card" style="width: 20rem;">
+    <img src="https://image.tmdb.org/t/p/w500/@Model.PosterPath" class="card-img-top" alt="">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title (@((!string.IsNullOrEmpty(Model.ReleaseDate)) ? Model.ReleaseDate.Substring(0, 4) : "N/A"))</h5>
+        <p class="card-text">@Model.Tagline</p>
+        @*<a href="#" class="btn btn-primary">Go somewhere</a>*@
+    </div>
 </div>

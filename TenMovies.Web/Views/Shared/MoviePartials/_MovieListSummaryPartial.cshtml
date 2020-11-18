@@ -1,0 +1,10 @@
+﻿@model TenMovies.Web.Models.MovieModels.MovieList
+
+<div class="card" style="width: 15rem">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.OwnerUsername</h6>
+        <p class="card-text">@Model.Description</p>
+        <a class="btn btn-primary" asp-controller="List" asp-action="ViewList" asp-route-movieListId="@Model.Id">View</a>
+    </div>
+</div>

@@ -5,25 +5,15 @@
 
 @{Html.Partial("_ErrorMessagePartial", TempData["ErrorMessage"]);}
 
-<div class="text-center">
+<div class="row">
     @if (Model?.Movies != null)
     {
         @foreach (var movie in Model.Movies)
         {
-            //Movie Partial
-            <div>
-                <h3>@movie.Title (@((!string.IsNullOrEmpty(movie.ReleaseDate)) ? @movie.ReleaseDate.Substring(0, 4) : "N/A"))</h3>
-                <p>@movie.Overview</p>
-                @if (!string.IsNullOrEmpty(movie.PosterPath))
-                {
-                    <img src="https://image.tmdb.org/t/p/w500/@movie.PosterPath" />
-                }
-                else
-                {
-                    //Placeholder image
-                }
-                <div>
-                    <a asp-controller="List" asp-action="AddMovieToList" asp-route-movieId="@movie.Id">Add this movie to a list</a>
+            <div class="col-sm-4">
+                <partial name="MoviePartials/_ViewMoviePartial" model="movie" />
+                <div class="align-content-center" style="padding: 5px">
+                    <a class="btn btn-primary align-content-center" asp-controller="List" asp-action="AddMovieToList" asp-route-movieId="@movie.Id" >Add</a>
                 </div>
             </div>
         }

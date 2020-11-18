@@ -4,6 +4,11 @@
 
 @inject UserManager<User> UserManager
 
+@{
+    ViewBag.Title = "Profile";
+    Layout = "_Layout";
+}
+
 <h2>Hi @UserManager.GetUserName(User)</h2>
 <hr />
 
@@ -13,12 +18,7 @@
 
 @foreach (var l in Model)
 {
-    <div>
-        <h3>@l.Title</h3>
-        <div>
-            <a asp-route-movieListId="@l.Id" asp-controller="List" asp-action="ViewList">View</a> |
-            <a asp-route-movieListId="@l.Id" asp-controller="List" asp-action="EditMovieList">Edit</a> |
-            <a asp-route-movieListId="@l.Id" asp-controller="List" asp-action="DeleteMovieList">Delete</a>
-        </div>
+    <div style="padding: 5px">
+        <partial name="MoviePartials/_EditMovieListPartial" model="l" />
     </div>
 }

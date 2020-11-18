@@ -2,31 +2,26 @@
 @model MoviesAndListViewModel
 
 @{
-    ViewBag.Title = "Create New List";
+    ViewBag.Title = "View";
     Layout = "_Layout";
 }
-
-<div>
-    <h2>@Model.MovieList.Title</h2>
-    <p>@Model.MovieList.Description</p>
-    <p>Created By: @Model.MovieList.OwnerUsername on @Model.MovieList.DateCreated</p>
-</div>
+@*<div>
+    <a asp-controller="User" asp-action="Profile"><i class="fa fa-home"></i> Profile</a>
+</div>*@
+<h2 style="text-align: center">Viewing @Model.MovieList.Title by @Model.MovieList.OwnerUsername</h2>
+<hr/>
 @if (!(Model.Movies == null || !Model.Movies.Any()))
 {
-    <div>
+    <div class="row" style="padding-bottom: 5px">
         @foreach (var m in Model.Movies)
         {
-            <div>
-                @*Movie Partial*@
-                @m.Title
+            <div class="col-sm-6">
+                <partial name="MoviePartials/_ViewMoviePartial" model="m" />
             </div>
         }
     </div>
 }
 else
 {
-    <div>There are no movies in this list.</div>
+    <div style="text-align: center">There are no movies in this list.<br/><a asp-controller="List" asp-action="EditMovieList" asp-route-movieListId="@Model.MovieList.Id">Add movies to this list</a></div>
 }
-<div>
-    <a asp-controller="User" asp-action="Profile">Go back to profile</a>
-</div>

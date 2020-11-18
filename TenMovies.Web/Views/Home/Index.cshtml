@@ -3,18 +3,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-<partial model="@TempData["ErrorMessage"]" name="_ErrorMessagePartial"/>
+<div style="text-align: right">
+    <a asp-action="Profile" asp-controller="User">View my lists</a>
+</div>
+<partial model="@TempData["ErrorMessage"]" name="_ErrorMessagePartial" />
 
-<form class="form-inline d-flex justify-content-center md-form form-sm" asp-action="Movies" method="get">
-    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search" name="searchTerm" id="searchTerm"
-           aria-label="Search">
-    <button class="border-0" style="background: none" type="submit">
-        <i class="fas fa-search" aria-hidden="true"></i>
-    </button>
-</form>
-
-@foreach (var l in Model)
-{
-    //Partial for ViewMovieList
-    await Html.RenderPartialAsync("MoviePartials/_ViewMovieListPartial", l);
-}
+<div class="row" style="padding: 5px">
+    @foreach (var l in Model)
+    {
+        <div class="col-sm-3" style="padding: 5px">
+            <partial model="l" name="MoviePartials/_MovieListSummaryPartial" />
+        </div>
+    }
+</div>

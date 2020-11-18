@@ -31,7 +31,7 @@ namespace TenMovies.Web.Repositories
 
         public MovieList GetListById(int id)
         {
-            return _context.MovieLists.First(l => l.Id == id);
+            return _context.MovieLists.FirstOrDefault(l => l.Id == id);
         }
 
         public bool IsDuplicate(int movieId, int listId)

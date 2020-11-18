@@ -57,6 +57,11 @@ namespace TenMovies.Web.Repositories
             return _context.MovieLists.Where(l => l.IsPrivate == false);
         }
 
+        public bool IsFullList(int listId)
+        {
+            return _context.Movies.Count(m => m.MovieListId == listId) >= 10;
+        }
+
         public IEnumerable<Movie> GetAllMoviesInMovieList(int movieListId)
         {
             return _context.Movies.Where(m => m.MovieListId == movieListId);

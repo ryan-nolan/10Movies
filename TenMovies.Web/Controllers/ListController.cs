@@ -93,6 +93,19 @@ namespace TenMovies.Web.Controllers
                                 Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))),
                     });
                 }
+
+                if (_efMovieListRepository.IsFullList(movieToListViewModel.ListId))
+                {
+                    TempData["FailMessage"] = "This list is full";
+                    return View(new AddMovieToListViewModel
+                    {
+                        MovieToAdd = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId),
+                        UsersMovieLists =
+                            _efMovieListRepository.GetAllListsForUser(
+                                Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))),
+                    });
+                }
+
                 Movie m = await _movieApiService.GetMovieByIdAsync(movieToListViewModel.MovieId);
                 m.MovieListId = movieToListViewModel.ListId;
                 _efMovieRepository.AddMovie(m);
